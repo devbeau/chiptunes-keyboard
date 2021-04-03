@@ -27,12 +27,18 @@
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Keys {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  border: 1px solid grey;
 }
+
+.key {
+  display:inline;
+  background-color: white;
+  border: 1px solid  grey;
+  width: 8.33%;
+  height: 
+}
+
