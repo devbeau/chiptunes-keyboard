@@ -1,3 +1,5 @@
+import {useState} from 'react';
+
 import Key from './Key';
 
 function createNoteTable() {
@@ -52,19 +54,54 @@ function getKeyLayout(noteFreq) {
     return layout;
 }
 
-let octave = 0;
-const keyboardLayout = getKeyLayout(createNoteTable());
-const currentKeys = Object.entries(keyboardLayout[octave]);
 
+const keyboardLayout = getKeyLayout(createNoteTable());
 
 function Keys(props) {
+    const [octave, setOctave] = useState(4);
+    const [waveForm, setWaveForm] = useState("Sine");
+
+    const currentKeys = Object.entries(keyboardLayout[octave]);
+    
+    function onOctaveChange(e) {
+        setOctave(e.target.value)
+    }
+
+    function onWaveFormChange(e) {
+        setWaveForm(e.target.value)
+    }
+
     return (
         <div className="Keys">
             {currentKeys.map((key, index) => { 
                 return (
-                <Key key={key[0]} noteInfo={key} />
+                <Key key={key[0]} noteInfo={key} waveForm={waveForm} />
                 )
-            })}         
+            })}
+            <div className="Controls">
+                <div>
+                    Octave:
+                    <select id='octave' onChange={e => onOctaveChange(e)} value={octave}>
+                        <option value='0'>0</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                        <option value='6'>6</option>
+                        <option value='7'>7</option>
+                    </select>
+                </div>
+                <div>
+                    Wave Form:
+                    <select id='wave-form' onChange={e => onWaveFormChange(e)} value={waveForm}>
+                        <option value='sine'>Sine</option>
+                        <option value='triangle'>Triangle</option>
+                        <option value='square'>Square</option>
+                        <option value='sawtooth'>Sawtooth</option>
+                    </select>       
+                </div>
+            </div>         
         </div>
     )
 }

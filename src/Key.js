@@ -1,7 +1,7 @@
 function Key (props) {
     let context = new AudioContext();
     let note = context.createOscillator();
-    note.type = "square";
+    note.type = props.waveForm;
     note.frequency.value = props.noteInfo[1];
     note.connect(context.destination)
 
@@ -11,7 +11,7 @@ function Key (props) {
     function onMouseUp() {
         note.stop();
         note = context.createOscillator();
-        note.type = "triangle";
+        note.type = props.waveForm;
         note.frequency.value = props.noteInfo[1];
         note.connect(context.destination)
     }
@@ -22,6 +22,7 @@ function Key (props) {
         onMouseUp= {e => {onMouseUp()}}
         >
             {props.noteInfo[0]}
+            {/* <sub>{props}</sub> */}
         </div>
     )
 }
