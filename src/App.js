@@ -5,6 +5,9 @@ function App() {
   return (
     <div className="App">
       <Keys />
+      <div>
+        Press the Notes to play a sound...
+      </div>
     </div>
   );
 }

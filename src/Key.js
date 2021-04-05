@@ -1,25 +1,73 @@
 function Key (props) {
     let context = new AudioContext();
     let note = context.createOscillator();
-    const real = new Float32Array(2);
-    const imag = new Float32Array(2);
-    real[0] = 0;
-    imag[0] = 0;
-    real[1] = 1;
-    imag[0] = 0;
+    note.type = props.waveForm;
+    note.frequency.value = props.noteInfo[1];
+    note.connect(context.destination)
 
-    var wave = context.createPeriodicWave(real, imag, {disableNormalization: true});
-    note.frequency.value = 440;
-    note.setPeriodicWave(wave);
-    note.type = "square";
-    note.connect(context.destination);
+    function onMouseDown() {
+        note.start();
+    }
 
-    note.start();
-    note.stop(1);
-    note.frequency.value *= 1.0595
+    function onMouseUp() {
+        note.stop();
+        note = context.createOscillator();
+        note.type = props.waveForm;
+        note.frequency.value = props.noteInfo[1];
+        note.connect(context.destination)
+    }
+
+    function onMouseLeave(e) {
+        if (e.buttons === 1) {
+            note.stop();
+            note = context.createOscillator();
+            note.type = props.waveForm;
+            note.frequency.value = props.noteInfo[1];
+            note.connect(context.destination)
+        }
+    }
+    
+    function onMouseEnter(e) {
+        if (e.buttons === 1) {
+            note.start();
+        }
+    }
+
+    function onKeyDown(e) {
+        if (e.key === props.keyMapping) {
+            note.start();
+        }
+    }
+
+    function onKeyUp(e) {
+        if(e.key === props.keyMapping) {
+            note.stop();
+            note = context.createOscillator();
+            note.type = props.waveForm;
+            note.frequency.value = props.noteInfo[1];
+            note.connect(context.destination)
+        }
+    }
+
+    function isSharp(noteName) {
+        return noteName.length == 3
+    }
 
     return (
-        <div className="key">{props.name}</div>
+        <div 
+            className={isSharp(props.noteInfo[0]) ? 'key sharp' : 'key'}   
+            onMouseDown={e => {onMouseDown(e)}}
+            onMouseUp= {e => {onMouseUp(e)}}
+            onMouseEnter={e => {onMouseEnter(e)}}
+            onMouseLeave={e => {onMouseLeave(e)}}
+            onKeyDown={e => {onKeyDown(e)}}
+            onKeyUp={e => {onKeyUp(e)}}
+            draggable={false}
+            style={{userSelect: "none"}}
+        >
+            {props.noteInfo[0].slice(0, props.noteInfo[0].length - 1)}
+            {/* <sub>{props}</sub> */}
+        </div>
     )
 }
 
