@@ -28,17 +28,50 @@
   color: #61dafb;
 }
 .Keys {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-  border: 1px solid grey;
+  position: relative;
+  display: inline-block;
+  height:160px;
+  padding: 20px;
 }
 
 .key {
-  display:inline;
-  background-color: white;
-  border: 1px solid  grey;
-  width: 8.33%;
-  height: 
+  font-weight: 500;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  float: left;
+  border-style: solid;
+  border-color: #000;
+  border-width: 2px 1px 2px 1px;
+  border-radius: 0 0 4px 4px;
+  color: darkslategrey;
+  text-align: center;
+  width: 30px;
+  height: 150px;
+  background: #fff;
+}
+
+.key:hover {
+  background: ivory;
+
+}
+
+.sharp {
+  background: #000;
+  color: ivory;
+  float: left;
+  left: 12px;
+  z-index: 10;
+  width: 20px;
+  height: 100px;
+  margin: 0 0 0 -22.5px;
+  padding: 15px 0 0 0;
+}
+
+.sharp:hover {
+  background: darkslategrey;
+  color: white;
 }
 

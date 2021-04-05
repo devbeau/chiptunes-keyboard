@@ -37,18 +37,22 @@ function getKeyLayout(noteFreq) {
     let layout = [];
     for (let i = 0; i < 8;i++){
         layout[i] = {};
-        layout[i]["A"] = noteFreq[i]["A"];
-        layout[i]["A#"] = noteFreq[i]["A#"];
-        layout[i]["B"] = noteFreq[i]["B"];
-        layout[i]["C"] = noteFreq[i+1]["C"];
-        layout[i]["C#"] = noteFreq[i+1]["C#"];
-        layout[i]["D"] = noteFreq[i+1]["D"];
-        layout[i]["D#"] = noteFreq[i+1]["D#"];
-        layout[i]["E"] = noteFreq[i+1]["E"];
-        layout[i]["F"] = noteFreq[i+1]["F"];
-        layout[i]["F#"] = noteFreq[i+1]["F#"];
-        layout[i]["G"] = noteFreq[i+1]["G"];
-        layout[i]["G#"] = noteFreq[i+1]["G#"];
+        layout[i][`A${i}`] = noteFreq[i]["A"];
+        layout[i][`A#${i}`] = noteFreq[i]["A#"];
+        layout[i][`B${i}`] = noteFreq[i]["B"];
+        layout[i][`C${i}`] = noteFreq[i+1]["C"];
+        layout[i][`C#${i}`] = noteFreq[i+1]["C#"];
+        layout[i][`D${i}`] = noteFreq[i+1]["D"];
+        layout[i][`D#${i}`] = noteFreq[i+1]["D#"];
+        layout[i][`E${i}`] = noteFreq[i+1]["E"];
+        layout[i][`F${i}`] = noteFreq[i+1]["F"];
+        layout[i][`F#${i}`] = noteFreq[i+1]["F#"];
+        layout[i][`G${i}`] = noteFreq[i+1]["G"];
+        layout[i][`G#${i}`] = noteFreq[i+1]["G#"];
+        layout[i][`A${i+1}`] = noteFreq[i+1]["A"];
+        layout[i][`A#${i+1}`] = noteFreq[i+1]["A#"];
+        layout[i][`B${i+1}`] = noteFreq[i+1]["B"];
+        
     }
     return layout;
 }
@@ -93,7 +97,7 @@ function Keys(props) {
             {currentKeys.map((key) => { 
                 return (
                 <Key 
-                    key={key[0]} 
+                    key={key[0]}
                     noteInfo={key} 
                     waveForm={waveForm} 
                     keyMapping={keyMap[`${key[0]}`]}
