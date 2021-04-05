@@ -17,9 +17,9 @@ function Key (props) {
     note.start();
     note.stop(1);
     note.frequency.value *= 1.0595
-
+    console.log(props)
     return (
-        <div className="key">{props.name}</div>
+        <div className="key">{props.noteInfo[0]}</div>
     )
 }
 
