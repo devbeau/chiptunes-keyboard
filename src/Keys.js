@@ -29,9 +29,9 @@ function createNoteTable() {
     return noteFreq;
 }
 
-async function addNoteTableMember(noteFreq, noteName, tableObject) {
-    tableObject[`${noteName}`] = noteFreq
-}
+// async function addNoteTableMember(noteFreq, noteName, tableObject) {
+//     tableObject[`${noteName}`] = noteFreq
+// }
 
 function getKeyLayout(noteFreq) {
     let layout = [];
@@ -78,8 +78,8 @@ const keyboardLayout = getKeyLayout(createNoteTable());
 const keyMap = createKeyPressMap();
 
 function Keys(props) {
-    const [octave, setOctave] = useState(4);
-    const [waveForm, setWaveForm] = useState("Sine");
+    const [octave, setOctave] = useState(3);
+    const [waveForm, setWaveForm] = useState("sine");
     const [isMouseDown, setMouseDown] = useState(false);
 
     const currentKeys = Object.entries(keyboardLayout[octave]);
@@ -109,7 +109,7 @@ function Keys(props) {
 
             <div className="Controls">
                 <div>
-                    Octave:
+                    {"Octave: "}
                     <select id='octave' onChange={e => onOctaveChange(e)} value={octave}>
                         <option value='0'>0</option>
                         <option value='1'>1</option>
@@ -122,7 +122,7 @@ function Keys(props) {
                     </select>
                 </div>
                 <div>
-                    Wave Form:
+                    {"Wave Form: "} 
                     <select id='wave-form' onChange={e => onWaveFormChange(e)} value={waveForm}>
                         <option value='sine'>Sine</option>
                         <option value='triangle'>Triangle</option>

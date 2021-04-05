@@ -50,7 +50,7 @@ function Key (props) {
     }
 
     function isSharp(noteName) {
-        return noteName.length == 3
+        return noteName.length === 3
     }
 
     return (
