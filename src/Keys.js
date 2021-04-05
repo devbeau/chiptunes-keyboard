@@ -47,22 +47,38 @@ function getKeyLayout(noteFreq) {
         layout[i]["E"] = noteFreq[i+1]["E"];
         layout[i]["F"] = noteFreq[i+1]["F"];
         layout[i]["F#"] = noteFreq[i+1]["F#"];
-        layout[i]["G"] = noteFreq[i+1]["G"]
-        layout[i]["G#"] = noteFreq[i+1]["G#"]
-
+        layout[i]["G"] = noteFreq[i+1]["G"];
+        layout[i]["G#"] = noteFreq[i+1]["G#"];
     }
     return layout;
 }
 
+function createKeyPressMap() {
+    let keyMap = {};
+    keyMap["A"]  =  'z';
+    keyMap["A#"] =  's';
+    keyMap["B"]  =  'x';
+    keyMap["C"]  =  'c';
+    keyMap["C#"] =  'f';
+    keyMap["D"]  =  'v';
+    keyMap["D#"] =  'g';
+    keyMap["E"]  =  'b';
+    keyMap["F"]  =  'n';
+    keyMap["F#"] =  'j';
+    keyMap["G"]  =  'm';
+    keyMap["G#"] =  'k';
+    return keyMap;
+}
 
 const keyboardLayout = getKeyLayout(createNoteTable());
+const keyMap = createKeyPressMap();
 
 function Keys(props) {
     const [octave, setOctave] = useState(4);
     const [waveForm, setWaveForm] = useState("Sine");
+    const [isMouseDown, setMouseDown] = useState(false);
 
     const currentKeys = Object.entries(keyboardLayout[octave]);
-    
     function onOctaveChange(e) {
         setOctave(e.target.value)
     }
@@ -73,11 +89,20 @@ function Keys(props) {
 
     return (
         <div className="Keys">
-            {currentKeys.map((key, index) => { 
+
+            {currentKeys.map((key) => { 
                 return (
-                <Key key={key[0]} noteInfo={key} waveForm={waveForm} />
+                <Key 
+                    key={key[0]} 
+                    noteInfo={key} 
+                    waveForm={waveForm} 
+                    keyMapping={keyMap[`${key[0]}`]}
+                    isMouseDown={isMouseDown}
+                    setMouseDown={setMouseDown}
+                />
                 )
             })}
+
             <div className="Controls">
                 <div>
                     Octave:
